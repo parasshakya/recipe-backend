@@ -6,7 +6,7 @@ const getById = async (req, res) => {
 
 
 
-  const data = await Schema.findById(req.params.id).populate("categoryId accountId");
+  const data = await Schema.findById(req.params.id);
 
   res.send({
     status: 200,
@@ -20,8 +20,9 @@ const getAll = async (req, res) => {
 
 
 
-  const data = await Schema.find({
-  });
+  const data = await Schema.find({ 
+  }).populate("user");
+
 
 
 
@@ -35,7 +36,7 @@ const getAll = async (req, res) => {
 
 const getByUser = async (req, res) =>{
 try{
-  const data = await Schema.find({userId: req.user._id})
+  const data = await Schema.find({user: req.user._id})
   res.send({
     status: 200,
     message: "Data retreived successfully",
@@ -62,76 +63,16 @@ const getByCategory = async (req, res) => {
   });
 };
 
-const getByAccount = async (req, res) => {
-  const data = await Schema.find(
-     {
-      accountId: req.params.id
-     }
-  ).populate("categoryId accountId ");
 
-  console.log(req.params);
-  res.send({
-    status: 200,
-    message: "Data retreived successfully",
-    data: data,
-  });
-};
 
-const getGreaterThan = async(req, res) => {
-  const data = await Schema.find();
-  console.log(req.params);
-  res.send({
-    status: 200,
-    message: "Data retreived successfully",
-    data: data.filter((item) => item.amount > parseInt(req.params.amount)),
-  });
-};
 
-const getLessThan = async (req, res) => {
-  const data = await Schema.find();
-  console.log(req.params);
-  res.send({
-    status: 200,
-    message: "Data retreived successfully",
-    data: data.filter((item) => item.amount < parseInt(req.params.amount)),
-  });
-};
-
-//
 
 const create = async (req, res) => {
   
   try {
-//     console.log(req.user._id);
 
-//     const accountId = req.body.accountId;
 
-//     const amount = req.body.amount;
-
-//     if(!accountId || !amount){
-//       res.status(400).send("AccountId and Amount are required");
-//       return;
-//     }
-
-//     const accountData = await AccountSchema.findById(accountId);
-
-//     if(!accountData){
-//       res.status(404).send("Account not found");
-//       return;
-//     }
-    
-
-// if(    accountData.balance < amount){
-
-//   res.status(400).send('Insufficient Balance in Bank Account, Failed to create Transaction');
-//   return;
-// }
-
-// accountData.balance -= amount;
-
-// await accountData.save();
-
-const data = await Schema.create({...req.body, userId: req.user._id});
+const data = await Schema.create({...req.body, user: req.user._id, image: req.file.filename});
 
 
 
@@ -142,7 +83,7 @@ const data = await Schema.create({...req.body, userId: req.user._id});
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error creating Transaction");
+    res.status(500).send("Error creating Recipe");
   }
 };
 
@@ -170,14 +111,10 @@ module.exports = {
   getById,
   getAll,
   getByCategory,
-  getByAccount,
-  getGreaterThan,
-  getLessThan,
+ 
   create,
   deleteOne,
   updateOne,
   getByUser
 };
 
-// catgory: id, title
-// account: id, title, amount

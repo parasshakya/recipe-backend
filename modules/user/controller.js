@@ -27,7 +27,9 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const data = await Schema.create(req.body);
+    const data = await Schema.create({
+      ...req.body, image: req.file.filename
+    });
     res.send({
       status: 200,
       message: "Data created successfully",

@@ -22,7 +22,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getByCategory = async (req, res) => {
+const getByName = async (req, res) => {
   const data = await CategorySchema.find({
     name: req.params.name,
   });
@@ -40,13 +40,9 @@ const getByCategory = async (req, res) => {
 
 const createCategory = async (req, res) => {
   try {
-    // const data = await CategorySchema.create({
-    //   ...req.body, 
-    //   image: req.file.filename
-    // }); for image upload
 
     const data = await CategorySchema.create({
-      ...req.body, 
+      ...req.body,  image: req.file.filename
     });
 
     res.send({
@@ -83,7 +79,7 @@ const updateOne = async (req, res) => {
 module.exports = {
   getById,
   getAll,
-  getByCategory,
+   getByName,
    createCategory,
   deleteOne,
   updateOne,

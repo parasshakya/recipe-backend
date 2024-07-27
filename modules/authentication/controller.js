@@ -1,13 +1,15 @@
 const bcrypt = require("bcrypt")
 const Schema = require("../user/schema")
 const jwt = require("jsonwebtoken")
+const multer = require("multer")
+const path = require("path")
 
 
 const signUp = async (req, res) =>{
 
   try{
     const userData = {
-      ...req.body
+      ...req.body, image: req.file.filename
     }
   
     const hashedPassword = await bcrypt.hash(userData.password, 10);

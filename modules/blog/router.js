@@ -1,13 +1,15 @@
-const express = require("express");
+const express = require("express")
 const router = express.Router();
-const multer = require("multer")
-const path = require("path")
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs")
 
-const controller = require("./controller");
+const controller = require("./controller")
+
 
 const imageStorage = multer.diskStorage({
     // Destination to store image     
-    destination: "uploads",
+    destination: "uploads" ,
       filename: (req, file, cb) => {
           cb(null, file.originalname.split('.')[0] + '_' + Date.now() 
              + path.extname(file.originalname))
@@ -32,11 +34,8 @@ const imageUpload = multer({
 }) 
 
 
-router.get("", controller.getAll);
-router.get("/:id", controller.getById);
-router.post("", imageUpload.single("image") , controller.create);
-router.delete("/:id", controller.deleteOne);
-router.put("/:id", controller.updateOne);
+router.post("", imageUpload.single("image"), controller.create);
+router.get("",controller.getAllBlogs);
 
 
 

@@ -40,8 +40,7 @@ const getAll = async (req, res) => {
 
 const createCuisine = async (req, res) => {
   try {
-    // const data = await CuisineSchema.create({...req.body, userId: req.user._id, image: req.file.filename }); For userID and image
-    const data = await CuisineSchema.create({...req.body });
+    const data = await CuisineSchema.create({...req.body, image: req.file.filename});
 
     res.send({
       

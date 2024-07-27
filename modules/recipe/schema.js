@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
 
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
 
-  cuisineId: {
+  cuisine: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Cuisine"
@@ -41,10 +41,10 @@ const recipeSchema = new Schema({
   },
 
 
-  // image: {
-  //   type: String, 
-  //   required: true
-  // },
+  image: {
+    type: String, 
+    required: true
+  },
 
 
 
@@ -60,7 +60,7 @@ const recipeSchema = new Schema({
 
  
   
-  categoryId: {
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Category"
