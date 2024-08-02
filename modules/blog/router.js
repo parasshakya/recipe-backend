@@ -36,6 +36,7 @@ const imageUpload = multer({
 
 router.post("", imageUpload.single("image"), controller.create);
 router.get("",controller.getAllBlogs);
+router.get("/:id", controller.getById );
 
 
 

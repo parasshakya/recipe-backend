@@ -38,7 +38,7 @@ const imageUpload = multer({
 
 router.get("/user", verifyUser, controller.getByUser )
 router.get("", controller.getAll);
-router.get("/:id", verifyUser, controller.getById);
+router.get("/:id", controller.getById);
 router.post("", verifyUser, imageUpload.single("image"), controller.create);
 router.delete("/:id", verifyUser, controller.deleteOne);
 router.put("/:id", verifyUser, controller.updateOne);

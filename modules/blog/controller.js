@@ -26,6 +26,19 @@ try{
 
 }
 
+const getById = async(req, res) =>{
+    try{
+        const data = await Schema.findById(req.params.id);
+        res.send({
+            status: 200,
+            message: "Blog retreived successfully",
+            data: data
+        })
+    }catch (e){
+        res.status(500).send("Failed to retrieve blog");
+    }
+}
+
 const getAllBlogs = async(req, res) =>{
     try{
 
@@ -45,5 +58,6 @@ const getAllBlogs = async(req, res) =>{
 
 module.exports = {
     create,
-    getAllBlogs
+    getAllBlogs,
+    getById
 }

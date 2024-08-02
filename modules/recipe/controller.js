@@ -1,12 +1,10 @@
 const Schema = require("./schema");
-const AccountSchema = require("../cuisine/schema")
 
 const getById = async (req, res) => {
-  console.log(req.params);
 
 
 
-  const data = await Schema.findById(req.params.id);
+  const data = await Schema.findById(req.params.id).populate("user category cuisine");
 
   res.send({
     status: 200,
