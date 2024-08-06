@@ -4,7 +4,7 @@ const multer = require("multer")
 const path = require("path")
 
 const controller = require("./controller");
-
+const { verifyUser } = require("../authentication/auth.middleware");
 const imageStorage = multer.diskStorage({
     // Destination to store image     
     destination: "uploads",
@@ -32,11 +32,17 @@ const imageUpload = multer({
 }) 
 
 
+router.get("/saved-recipes", verifyUser,controller.getSavedRecipesByUser);
+
 router.get("", controller.getAll);
 router.get("/:id", controller.getById);
 router.post("", imageUpload.single("image") , controller.create);
 router.delete("/:id", controller.deleteOne);
 router.put("/:id", controller.updateOne);
+router.post("/saved-recipes", verifyUser, controller.createSavedRecipe);
+router.post("/remove-saved-recipe", verifyUser, controller.removeSavedRecipe);
+
+
 
 
 

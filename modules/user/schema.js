@@ -23,7 +23,9 @@ password:{
 
 image: {
   type:String,
-}
+},
+savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }]
+
 
 
 

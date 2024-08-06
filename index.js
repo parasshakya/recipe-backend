@@ -19,12 +19,12 @@ app.use(cors(
 ));
 app.use("/recipes", recipeRouter)
 
+
 app.use("/categories", categoryRouter);
 app.use("/cuisines", cuisineRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 app.use("/blogs", blogRouter );
-
 
 app.get("/uploads/:filename", (req,res) =>{
   const filePath = path.join(__dirname, `uploads/${req.params.filename}`)

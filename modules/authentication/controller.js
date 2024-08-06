@@ -1,8 +1,7 @@
 const bcrypt = require("bcrypt")
 const Schema = require("../user/schema")
 const jwt = require("jsonwebtoken")
-const multer = require("multer")
-const path = require("path")
+
 
 
 const signUp = async (req, res) =>{
@@ -85,7 +84,7 @@ const login = async (req, res) =>{
           status: 200,
           message: "Login Successful",
           data: {
-            details:userDetails,
+            userData:userDetails,
             token: token
           }
       

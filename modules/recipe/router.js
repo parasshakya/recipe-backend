@@ -43,6 +43,12 @@ router.post("", verifyUser, imageUpload.single("image"), controller.create);
 router.delete("/:id", verifyUser, controller.deleteOne);
 router.put("/:id", verifyUser, controller.updateOne);
 
+// Like a recipe
+router.post('/:id/like', verifyUser, controller.likeRecipe );
+
+//comment a recipe
+router.post('/:id/comment', verifyUser, controller.commentRecipe );
+
 
 
 module.exports = router;
